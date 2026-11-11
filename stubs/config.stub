@@ -1,0 +1,21 @@
+{{{
+  exports({ to: app.configPath('bus.ts') })
+}}}
+import { defineConfig } from '@ifullgaz/adonis-bus'
+import { redis } from '@boringnode/bus/transports/redis'
+
+export default defineConfig({
+  default: 'redis',
+  transports: {
+    redis: {
+      transport: redis(),
+      keyPrefix: "prefix",
+      retryQueue: {
+        enabled: true,
+        removeDuplicates: true,
+        maxSize: 100,
+        retryInterval: '100ms',
+      }
+    },
+  },
+})

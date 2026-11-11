@@ -1,0 +1,12 @@
+services:
+  adonis-bus:
+    image: ifullgaz/adonis-bus
+    build:
+      context: .
+      dockerfile: ./docker/nodejs/Dockerfile
+      args:
+        CODE_PATH_HOST: ${CODE_PATH_HOST:-.}
+        CODE_PATH_CONTAINER: ${CODE_PATH_CONTAINER:-/app}
+    restart: always
+    volumes:  
+      - ${CODE_PATH_HOST:-.}:${CODE_PATH_CONTAINER:-/app}
